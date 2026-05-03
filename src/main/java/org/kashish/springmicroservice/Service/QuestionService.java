@@ -24,4 +24,9 @@ public class QuestionService {
     public List<Question> getAllQuestionsByCategory(String category) {
         return questionDao.findByCategoryIgnoreCase(category);
     }
+
+    public String addQuesion(Question question) {
+        questionDao.save(question);
+        return "Question Added Successfully";
+    }
 }
