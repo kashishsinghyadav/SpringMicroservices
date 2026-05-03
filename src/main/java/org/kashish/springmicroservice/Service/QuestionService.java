@@ -22,6 +22,6 @@ public class QuestionService {
     }
 
     public List<Question> getAllQuestionsByCategory(String category) {
-        return questionDao.findByCategory(category);
+        return questionDao.findByCategoryIgnoreCase(category);
     }
 }
