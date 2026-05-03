@@ -4,6 +4,8 @@ package org.kashish.springmicroservice.Controller;
 import org.kashish.springmicroservice.Service.QuestionService;
 import org.kashish.springmicroservice.model.Question;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,13 +19,28 @@ public class QuestionController {
 
 
     @GetMapping("/getAllQuestion")
-    public List<Question> getAllQuestion(){
-        return questionService.getAllQuestions();
+    public ResponseEntity<List<Question>> getAllQuestion(){
+        try{
+            return  new ResponseEntity<>(questionService.getAllQuestions(),HttpStatus.OK) ;
+
+        }
+        catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("category/{category}")
-    public List<Question> getQuestionByCategory(@PathVariable String category){
-        return questionService.getAllQuestionsByCategory(category);
+    public  ResponseEntity<List<Question>> getQuestionByCategory(@PathVariable String category){
+
+        try{
+            return new ResponseEntity<>(questionService.getAllQuestionsByCategory(category),HttpStatus.OK) ;
+
+        }
+        catch (Exception e){
+
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
 
     }
 
